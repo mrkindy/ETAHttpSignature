@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32428.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpSignature", "HttpSignature\HttpSignature.csproj", "{6E9C8C91-0F60-4097-B52D-A5B294752F55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+		Setup|Any CPU = Setup|Any CPU
+		Setup|x86 = Setup|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E9C8C91-0F60-4097-B52D-A5B294752F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E9C8C91-0F60-4097-B52D-A5B294752F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E9C8C91-0F60-4097-B52D-A5B294752F55}.Debug|x86.ActiveCfg = Debug|x86
+		{6E9C8C91-0F60-4097-B52D-A5B294752F55}.Debug|x86.Build.0 = Debug|x86
+		{6E9C8C91-0F60-4097-B52D-A5B294752F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E9C8C91-0F60-4097-B52D-A5B294752F55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E9C8C91-0F60-4097-B52D-A5B294752F55}.Release|x86.ActiveCfg = Release|x86
+		{6E9C8C91-0F60-4097-B52D-A5B294752F55}.Release|x86.Build.0 = Release|x86
+		{6E9C8C91-0F60-4097-B52D-A5B294752F55}.Setup|Any CPU.ActiveCfg = Setup|Any CPU
+		{6E9C8C91-0F60-4097-B52D-A5B294752F55}.Setup|Any CPU.Build.0 = Setup|Any CPU
+		{6E9C8C91-0F60-4097-B52D-A5B294752F55}.Setup|x86.ActiveCfg = Setup|x86
+		{6E9C8C91-0F60-4097-B52D-A5B294752F55}.Setup|x86.Build.0 = Setup|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF000670-7C35-445F-A1FC-6DC69BA3F90C}
+	EndGlobalSection
+EndGlobal
