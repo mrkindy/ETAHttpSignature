@@ -6,7 +6,7 @@ so you can integrate with any other application (Desktop Or Web)
 - Download [ETAHttpSignature.zip](https://github.com/mrkindy/ETAHttpSignature/raw/master/ETAHttpSignature.zip)
 - Extract ETAHttpSignature.zip files in safe folder
 - Run HttpSignature.exe
-- Now you can sign your [invoice serialize data](https://sdk.invoicing.eta.gov.eg/document-serialization-approach/) by sending it to http://localhost:18088
+- Now you can sign your [invoice serialize data](https://sdk.invoicing.eta.gov.eg/document-serialization-approach/) by sending it to `ws://localhost:18088` by WebSocket
 
 ## Features
 - Sign Egyptian Tax EInvoice through Websocket
