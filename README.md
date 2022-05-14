@@ -64,6 +64,9 @@ socket.onopen = function() {
 };
 ```
 
+## Contribution
+Your contribution is welcome
+
 ## License
 MIT
 
