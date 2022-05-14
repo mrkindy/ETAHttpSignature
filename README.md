@@ -9,10 +9,60 @@ so you can integrate with any other application (Desktop Or Web)
 - Now you can sign your [invoice serialize data](https://sdk.invoicing.eta.gov.eg/document-serialization-approach/) by sending it to http://localhost:18088
 
 ## Features
-Soon
+- Sign Egyptian Tax EInvoice through Websocket
 
 ## Documentation
-Soon
+
+Send the following json as `text` to `ws://localhost:18088`
+
+```
+{Document:'{serialize_data}',TokenCertificate:'Egypt Trust Sealing CA'}
+```
+And you will receive the json as `text` and you should convert it to json
+
+```
+{cades:"{Data}"}
+```
+{Data} could be :
+- NO_SOLTS_FOUND
+- PASSWORD_INVAILD
+- CERTIFICATE_NOT_FOUND
+- NO_DEVICE_DETECTED
+- Or Signature as a long text
+
+## Javascript Example
+
+```
+var signature;
+var socket = new WebSocket("ws://localhost:18088");
+
+function ConnectToSignatureServer() {
+    socket.send('{Document:\'{serialize_data}\',TokenCertificate:\'Egypt Trust Sealing CA\'}');
+    
+    socket.onmessage = function (response) { 
+        var responseObj = JSON.parse(response.data);
+
+        if(responseObj.cades != 'NO_SOLTS_FOUND' && responseObj.cades != 'PASSWORD_INVAILD' && responseObj.cades != 'CERTIFICATE_NOT_FOUND' && responseObj.cades != 'NO_DEVICE_DETECTED')
+        {
+            alert('Document Signed');
+            signature = responseObj.cades;
+        }else{
+            alert(responseObj.cades);
+        }
+    };
+}
+
+socket.onclose = function() { 
+    alert('Connection is closed');
+};
+
+socket.onerror = function() { 
+    alert('Connection Error');
+};
+socket.onopen = function() { 
+    alert('Connection Open');
+};
+```
 
 ## License
 MIT
