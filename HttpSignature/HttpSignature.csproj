@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 	<UseWindowsForms>true</UseWindowsForms>
 	  <ApplicationIcon>icon.ico</ApplicationIcon>
@@ -31,6 +31,7 @@
     <PackageReference Include="Pkcs11Interop" Version="5.1.2" />
     <PackageReference Include="Simple-HTTP" Version="1.0.6" />
     <PackageReference Include="System.Security.Cryptography.Pkcs" Version="5.0.0" />
+    <PackageReference Include="WebSocketSharp" Version="1.0.3-rc11" />
   </ItemGroup>
 
   <ItemGroup>
