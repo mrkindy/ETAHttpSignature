@@ -23,7 +23,7 @@ And you will receive the json as `text` and you should convert it to json
 ```
 {cades:"{Data}"}
 ```
-{Data} could be :
+`{Data}` could be :
 - NO_SOLTS_FOUND
 - PASSWORD_INVAILD
 - CERTIFICATE_NOT_FOUND
