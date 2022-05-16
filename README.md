@@ -15,12 +15,12 @@ so you can integrate with any other application (Desktop Or Web)
 
 Send the following json as `text` to `ws://localhost:18088`
 
-``` json
+```
 {Document:'{serialize_data}',TokenCertificate:'Egypt Trust Sealing CA'}
 ```
 And you will receive the json as `text` and you should convert it to json
 
-``` json
+```
 {cades:"{Data}"}
 ```
 {Data} could be :
