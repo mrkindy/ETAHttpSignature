@@ -15,12 +15,12 @@ so you can integrate with any other application (Desktop Or Web)
 
 Send the following json as `text` to `ws://localhost:18088`
 
-```
+``` json
 {Document:'{serialize_data}',TokenCertificate:'Egypt Trust Sealing CA'}
 ```
 And you will receive the json as `text` and you should convert it to json
 
-```
+``` json
 {cades:"{Data}"}
 ```
 {Data} could be :
@@ -32,7 +32,7 @@ And you will receive the json as `text` and you should convert it to json
 
 ## Javascript Example
 
-```
+``` javascript
 var signature;
 var socket = new WebSocket("ws://localhost:18088");
 
@@ -68,7 +68,7 @@ socket.onopen = function() {
 Your contribution is welcome
 
 ## License
-MIT
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
 ## Credit
 [Ibrahim Abotaleb](https://github.com/mrkindy)
