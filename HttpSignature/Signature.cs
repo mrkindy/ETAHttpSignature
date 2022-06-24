@@ -17,9 +17,9 @@ namespace HttpSignature
 {
     public class Signature : WebSocketBehavior
     {
-        private readonly string DllLibPath = "eps2003csp11.dll";
+        private readonly string DllLibPath = "eps2003csp11.dll"; // Use "aetpkss1.dll" For G&D StarSign
         private string TokenPin = "00000000";
-        private string TokenCertificate = "Egypt Trust Sealing CA";
+        private string TokenCertificate = "Egypt Trust Sealing CA"; // Use "MCDR CA" For Misr Clearing Company Certificate 
 
         protected override void OnMessage(MessageEventArgs e)
         {
