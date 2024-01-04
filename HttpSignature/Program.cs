@@ -6,7 +6,6 @@ namespace HttpSignature
 {
     class Program
     {
-
         public static string ShowDialog(string caption, string text)
         {
             Form prompt = new Form()
@@ -41,9 +40,10 @@ namespace HttpSignature
             wssv.AddWebSocketService<Signature>("/");
             wssv.Start();
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("█▓▒▒░░░Egyptian Tax EInvoice HttpSignature░░░▒▒▓█");
+            Console.WriteLine("█▓▒▒░░░Egyptian Tax E-Invoice HttpSignature Server░░░▒▒▓█");
             Console.WriteLine("Don't close this window or enter any key while you need to sign invoices from your system.");
             Console.WriteLine("Server Now Runing and wait conections to sign your invoices.");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.ReadKey();
             wssv.Stop();
         }

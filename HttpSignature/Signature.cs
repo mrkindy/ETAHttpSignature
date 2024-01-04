@@ -17,7 +17,9 @@ namespace HttpSignature
 {
     public class Signature : WebSocketBehavior
     {
-        private readonly string DllLibPath = "eps2003csp11.dll"; // Use "aetpkss1.dll" For G&D StarSign
+        private readonly string[] drivers = { "ePass2003", "WD_PROXKEY", "Egypt Trust" };
+
+        private string DllLibPath = "eps2003csp11.dll"; // Use "aetpkss1.dll" For G&D StarSign
         
         private string TokenPin = "00000000";
         
@@ -27,31 +29,93 @@ namespace HttpSignature
         {
             SignRequest data = JsonConvert.DeserializeObject<SignRequest>(e.Data);
 
-            TokenCertificate = data.TokenCertificate;
-
-            if (string.IsNullOrEmpty(data.Password))
+            if (string.IsNullOrEmpty(data.Type))
             {
-                TokenPin = Program.ShowDialog("طلب توقيع", "يرجى ادخل كلمة المرور");
-            }
-            else
-            {
-                TokenPin = data.Password;
+                Console.WriteLine("[Type] attribute can't be null or empty!");
+                Send("{\"status\":0,\"message\":\"[Type] attribute can't be null or empty!\"}");
+                return;
             }
 
-            try
-            {
-                string cades = SignWithCMS(data.Document);
+            if (data.Type == "LIST_SUPPORTED_DRIVERS")
+            {   
+                Console.WriteLine("Supported Drivers:");
 
-                Console.WriteLine("Invoice Signed.");
+                string drivers_list = "";
+                
+                foreach (string driver in drivers)
+                {
+                    Console.WriteLine("- " + driver);
+                    drivers_list += (drivers_list == "" ? "" : ",") + "\"" + driver + "\"";
+                }
 
-                Send("{\"status\":1,\"message\":\"Invoice Signed.\",\"cades\":\"" + cades + "\"}");
+                Send("{\"status\":1,\"message\":\"List of Supported Drivers.\",\"type\":\"" + data.Type + "\",\"data\":[" + drivers_list + "]}");
+                return;
             }
-            catch (Exception signException)
-            {
-                Console.WriteLine(signException.GetBaseException().Message);
 
-                Send("{\"status\":0,\"message\":\"Failed to sign document!\"}");
+            if (data.Type == "SIGN_DOCUMENT")
+            {
+                if (!IdentifyDriver(data)) return;
+
+                if (string.IsNullOrEmpty(data.Password))
+                {
+                    TokenPin = Program.ShowDialog("طلب توقيع", "يرجى ادخل كلمة المرور");
+                }
+                else
+                {
+                    TokenPin = data.Password;
+                }
+
+                try
+                {
+                    string cades = SignWithCMS(data.Document);
+
+                    Console.WriteLine("Invoice Signed.");
+
+                    Send("{\"status\":1,\"message\":\"Invoice Signed.\",\"cades\":\"" + cades + "\"}");
+                }
+                catch (Exception signException)
+                {
+                    Console.WriteLine("Failed to sign document!");
+                    Console.WriteLine(signException.GetBaseException().Message);
+                    Send("{\"status\":0,\"message\":\"Failed to sign document!\",\"exception_message\":\"" + signException.GetBaseException().Message + "\"}");
+                }
             }
+        }
+
+        private bool IdentifyDriver(SignRequest data)
+        {
+            if (data.Driver == "ePass2003")
+            {
+                DllLibPath = "eps2003csp11.dll";
+                TokenCertificate = "Egypt Trust Sealing CA"; //needs to be reviewd
+            } else if (data.Driver == "WD_PROXKEY")
+            {
+                DllLibPath = ""; //needs to be reviewd
+                TokenCertificate = ""; //needs to be reviewd
+            } else if (data.Driver == "Egypt Trust")
+            {
+                DllLibPath = ""; //needs to be reviewd
+                TokenCertificate = ""; //needs to be reviewd
+            } else
+            {
+                Console.WriteLine("You didn't select predefined driver.");
+
+                if (string.IsNullOrEmpty(data.DllLibPath) || string.IsNullOrEmpty(data.TokenCertificate))
+                {
+                    Console.WriteLine("[DllLibPath] and [TokenCertificate] attributes can't be null or empty!");
+                    Send("{\"status\":0,\"message\":\"You didn't select predefined driver, [DllLibPath] and [TokenCertificate] attributes can't be null or empty!\"}");
+                    return false;
+                }
+
+                DllLibPath = data.DllLibPath;
+                TokenCertificate = data.TokenCertificate;
+            }
+
+            Console.WriteLine("Identified Driver:");
+            Console.WriteLine("- DllLibPath:" + DllLibPath);
+            Console.WriteLine("- TokenCertificate:" + TokenCertificate);
+
+            return true;
         }
 
         private byte[] HashBytes(byte[] input)
